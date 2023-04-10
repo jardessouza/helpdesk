@@ -21,14 +21,12 @@ public class DBService {
     public void instanciaDB(){
 
         Tecnico tec1 = new Tecnico(
-                null,
                 "Validr Cezar",
                 "04184426301",
                 "validir@mail.com",
                 "123");
 
         Cliente cli1 = new Cliente(
-                null,
                 "Linus Torvalds",
                 "13687731090",
                 "teste@mail.com",
