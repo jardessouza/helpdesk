@@ -3,7 +3,7 @@ package br.com.jardessouza.service;
 import br.com.jardessouza.domain.Tecnico;
 import br.com.jardessouza.repository.PessoaRepository;
 import br.com.jardessouza.repository.TecnicoRepository;
-import br.com.jardessouza.service.exceptions.TecnicoNotFoundException;
+import br.com.jardessouza.service.exceptions.ObjectNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
@@ -18,7 +18,7 @@ public class TecnicoService {
 
     public Tecnico findById(Integer id) {
         return this.tecnicoRepository.findById(id)
-                .orElseThrow(() -> new TecnicoNotFoundException(id));
+                .orElseThrow(() -> new ObjectNotFoundException(id));
     }
 
     public List<Tecnico> listAll() {

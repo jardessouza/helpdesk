@@ -40,7 +40,7 @@ public class Tecnico extends Pessoa {
                 request.getCpf(),
                 request.getEmail(),
                 request.getSenha(),
-                request.getPerfil()
+                Perfil.toEnum(request.getPerfil())
         );
 
     }

@@ -7,11 +7,12 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class TecnicoRequest {
+public class TecnicoRequest implements Serializable {
     @NotBlank(message = "O campo NOME é requerido")
     protected String nome;
     @NotBlank(message = "O campo CPF é requerido")
@@ -20,5 +21,5 @@ public class TecnicoRequest {
     protected String email;
     @NotBlank(message = "O campo SENHA é requerido")
     protected String senha;
-    protected Perfil perfil;
+    protected Integer perfil;
 }

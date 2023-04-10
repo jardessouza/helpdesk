@@ -6,11 +6,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
+import java.io.Serializable;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 
-public class ClienteRequest {
+public class ClienteRequest implements Serializable {
     @NotBlank(message = "O campo NOME é requerido.")
     protected String nome;
     @NotBlank(message = "O campo CPF é requerido.")
@@ -19,6 +21,6 @@ public class ClienteRequest {
     protected String email;
     @NotBlank(message = "O campo SENHA é requerido.")
     protected String senha;
-    protected Perfil perfil;
+    protected Integer perfil;
 
 }

@@ -3,7 +3,7 @@ package br.com.jardessouza.service;
 import br.com.jardessouza.domain.Cliente;
 import br.com.jardessouza.repository.ClienteRepository;
 import br.com.jardessouza.repository.PessoaRepository;
-import br.com.jardessouza.service.exceptions.ClienteNotFound;
+import br.com.jardessouza.service.exceptions.ObjectNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
@@ -18,7 +18,7 @@ public class ClienteService {
 
     public Cliente findById(Integer id){
         return this.clienteRepository.findById(id)
-                .orElseThrow(() -> new ClienteNotFound(id));
+                .orElseThrow(() -> new ObjectNotFoundException(id));
     }
 
     public List<Cliente> findAll(){

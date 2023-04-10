@@ -38,9 +38,9 @@ public class TecnicoResource {
 
     @PostMapping
     public ResponseEntity<TecnicoResponse> create(@RequestBody @Valid TecnicoRequest request){
-        var tecnicoCreate = this.tenicoService.create(Tecnico.toModel(request));
+        var obj = this.tenicoService.create(Tecnico.toModel(request));
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
-                .path("{id}").buildAndExpand(tecnicoCreate.getId()).toUri();
+                .path("{id}").buildAndExpand(obj.getId()).toUri();
 
         return ResponseEntity.created(uri).build();
     }
