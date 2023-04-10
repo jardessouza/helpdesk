@@ -1,6 +1,5 @@
 package br.com.jardessouza.service.exceptions;
 
-import net.bytebuddy.asm.Advice;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +20,20 @@ public class ResourceExeceptionHandler {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.NOT_FOUND.value())
                 .error("Tecnico não encontrado")
+                .message(ex.getMessage())
+                .path(request.getRequestURI())
+                .build();
+
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+    }
+
+    @ExceptionHandler(ClienteNotFound.class)
+    public ResponseEntity<StandardError> clienteNotFoundException(ClienteNotFound ex,
+                                                                  HttpServletRequest request){
+        StandardError error = StandardError.builder()
+                .timestamp(LocalDateTime.now())
+                .status(HttpStatus.NOT_FOUND.value())
+                .error("Cliente não encontrado")
                 .message(ex.getMessage())
                 .path(request.getRequestURI())
                 .build();
