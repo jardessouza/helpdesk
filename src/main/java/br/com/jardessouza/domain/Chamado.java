@@ -1,5 +1,6 @@
 package br.com.jardessouza.domain;
 
+import br.com.jardessouza.domain.dtos.ChamadoRequest;
 import br.com.jardessouza.domain.enums.Prioridade;
 import br.com.jardessouza.domain.enums.Status;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -45,6 +46,42 @@ public class Chamado implements Serializable {
         this.observacoes = observacoes;
         this.tecnico = tecnico;
         this.cliente = cliente;
+    }
+
+    public Chamado(Prioridade prioridade, Status status, String titulo, String observacoes, Tecnico tecnico, Cliente cliente) {
+        this.prioridade = prioridade;
+        this.status = status;
+        this.titulo = titulo;
+        this.observacoes = observacoes;
+        this.tecnico = tecnico;
+        this.cliente = cliente;
+    }
+
+    public static Chamado toModel(ChamadoRequest request){
+        Tecnico tecnico = getTecnico(request);
+
+        Cliente cliente = getCliente(request);
+
+        return new Chamado(
+                Prioridade.toEnum(request.getPrioridade()),
+                Status.toEnum(request.getStatus()),
+                request.getTitulo(),
+                request.getObservacoes(),
+                tecnico,
+                cliente
+        );
+    }
+
+    private static Cliente getCliente(ChamadoRequest request) {
+        Cliente cliente = new Cliente();
+        cliente.setId(request.getCliente());
+        return cliente;
+    }
+
+    private static Tecnico getTecnico(ChamadoRequest request) {
+        Tecnico tecnico = new Tecnico();
+        tecnico.setId(request.getTecnico());
+        return tecnico;
     }
 
     @Override

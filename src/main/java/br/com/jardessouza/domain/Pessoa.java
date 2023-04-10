@@ -29,7 +29,6 @@ public abstract class Pessoa implements Serializable {
     protected String email;
     protected String senha;
 
-    @Enumerated(value = EnumType.STRING)
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "PERFIS")
     protected Set<Perfil> perfis = new HashSet<>();

@@ -34,7 +34,6 @@ public class DBService {
         );
 
         Chamado c1 = new Chamado(
-                null,
                 Prioridade.MEDIA,
                 Status.ANDAMENTO,
                 "Chamado 01",

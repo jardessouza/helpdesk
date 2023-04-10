@@ -39,7 +39,7 @@ public class Cliente extends Pessoa {
                 clienteRequest.getCpf(),
                 clienteRequest.getEmail(),
                 clienteRequest.getSenha(),
-                clienteRequest.getPerfil()
+                Perfil.toEnum(clienteRequest.getPerfil())
         );
     }
 
