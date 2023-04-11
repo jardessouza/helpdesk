@@ -3,12 +3,14 @@ package br.com.jardessouza.service;
 import br.com.jardessouza.domain.Chamado;
 import br.com.jardessouza.domain.Cliente;
 import br.com.jardessouza.domain.Tecnico;
+import br.com.jardessouza.domain.enums.Perfil;
 import br.com.jardessouza.domain.enums.Prioridade;
 import br.com.jardessouza.domain.enums.Status;
 import br.com.jardessouza.repository.ChamadoRepository;
 import br.com.jardessouza.repository.ClienteRepository;
 import br.com.jardessouza.repository.TecnicoRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -18,19 +20,22 @@ public class DBService {
     private final  ClienteRepository clienteRepository;
     private final ChamadoRepository chamadoRepository;
 
+    private final BCryptPasswordEncoder encoder;
+
     public void instanciaDB(){
 
         Tecnico tec1 = new Tecnico(
                 "Validr Cezar",
                 "04184426301",
                 "validir@mail.com",
-                "123");
+                encoder.encode("123"),
+                Perfil.ADMIN);
 
         Cliente cli1 = new Cliente(
                 "Linus Torvalds",
                 "13687731090",
                 "teste@mail.com",
-                "123"
+                encoder.encode("123")
         );
 
         Chamado c1 = new Chamado(

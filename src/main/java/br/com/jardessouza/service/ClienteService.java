@@ -6,6 +6,7 @@ import br.com.jardessouza.repository.PessoaRepository;
 import br.com.jardessouza.service.exceptions.ObjectNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,6 +16,8 @@ import java.util.List;
 public class ClienteService {
     private final ClienteRepository clienteRepository;
     private final PessoaRepository pessoaRepository;
+
+    private final BCryptPasswordEncoder encoder;
 
     public Cliente findById(Integer id){
         return this.clienteRepository.findById(id)
@@ -27,6 +30,7 @@ public class ClienteService {
 
     public Cliente create(Cliente cliente){
         validationCpfAndEmail(cliente);
+        cliente.setSenha(encoder.encode(cliente.getSenha()));
         return this.clienteRepository.save(cliente);
     }
 
