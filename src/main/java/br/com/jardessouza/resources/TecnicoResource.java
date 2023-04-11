@@ -6,6 +6,7 @@ import br.com.jardessouza.domain.dtos.TecnicoResponse;
 import br.com.jardessouza.service.TecnicoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -35,7 +36,7 @@ public class TecnicoResource {
 
         return ResponseEntity.ok().body(listAllTecnicos);
     }
-
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @PostMapping
     public ResponseEntity<TecnicoResponse> create(@RequestBody @Valid TecnicoRequest request){
         var obj = this.tenicoService.create(Tecnico.toModel(request));
@@ -44,13 +45,13 @@ public class TecnicoResource {
 
         return ResponseEntity.created(uri).build();
     }
-
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @PutMapping(path = "/{id}")
     public ResponseEntity<Void> update(@PathVariable Integer id, @RequestBody @Valid TecnicoRequest request){
         this.tenicoService.update(id, Tecnico.toModel(request));
         return ResponseEntity.noContent().build();
     }
-
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @DeleteMapping(path = "/{id}")
     public ResponseEntity<Void> delete(@PathVariable Integer id){
         this.tenicoService.delete(id);

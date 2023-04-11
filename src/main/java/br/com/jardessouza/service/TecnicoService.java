@@ -6,6 +6,7 @@ import br.com.jardessouza.repository.TecnicoRepository;
 import br.com.jardessouza.service.exceptions.ObjectNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,6 +16,8 @@ import java.util.List;
 public class TecnicoService {
     private final TecnicoRepository tecnicoRepository;
     private final PessoaRepository pessoaRepository;
+
+    private final BCryptPasswordEncoder encoder;
 
     public Tecnico findById(Integer id) {
         return this.tecnicoRepository.findById(id)
@@ -27,6 +30,7 @@ public class TecnicoService {
 
     public Tecnico create(Tecnico tecnico) {
         validaPorCpfEEmail(tecnico);
+        tecnico.setSenha(encoder.encode(tecnico.getSenha()));
         return this.tecnicoRepository.save(tecnico);
     }
 
