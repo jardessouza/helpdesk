@@ -28,15 +28,20 @@ public class TecnicoService {
         return this.tecnicoRepository.findAll();
     }
 
-    public Tecnico create(Tecnico tecnico) {
-        validaPorCpfEEmail(tecnico);
-        tecnico.setSenha(encoder.encode(tecnico.getSenha()));
-        return this.tecnicoRepository.save(tecnico);
+    public Tecnico create(Tecnico obj) {
+        validaPorCpfEEmail(obj);
+        obj.setSenha(encoder.encode(obj.getSenha()));
+        return this.tecnicoRepository.save(obj);
     }
 
     public void update(Integer id, Tecnico obj) {
-        findById(id);
+        var oldObj = findById(id);
         obj.setId(id);
+        validaPorCpfEEmail(obj);
+
+        if (!obj.getSenha().equals(oldObj.getSenha())){
+            obj.setSenha(encoder.encode(obj.getSenha()));
+        }
         this.tecnicoRepository.save(obj);
     }
 

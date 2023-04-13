@@ -28,16 +28,22 @@ public class ClienteService {
         return this.clienteRepository.findAll();
     }
 
-    public Cliente create(Cliente cliente){
-        validationCpfAndEmail(cliente);
-        cliente.setSenha(encoder.encode(cliente.getSenha()));
-        return this.clienteRepository.save(cliente);
+    public Cliente create(Cliente obj){
+        validationCpfAndEmail(obj);
+        obj.setSenha(encoder.encode(obj.getSenha()));
+        return this.clienteRepository.save(obj);
     }
 
-    public void update(Integer id, Cliente cliente){
-        findById(id);
-        cliente.setId(id);
-        this.clienteRepository.save(cliente);
+    public void update(Integer id, Cliente obj){
+        var oldObj = findById(id);
+        obj.setId(id);
+        validationCpfAndEmail(obj);
+
+        if (!obj.getSenha().equals(oldObj.getSenha())){
+            obj.setSenha(encoder.encode(obj.getSenha()));
+        }
+
+        this.clienteRepository.save(obj);
     }
 
     public void delete(Integer id){
