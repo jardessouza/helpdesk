@@ -1,5 +1,6 @@
 package br.com.jardessouza.service.exceptions;
 
+import org.apache.el.parser.Node;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,7 +10,13 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
+import javax.validation.Path;
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @ControllerAdvice
 public class ResourceExeceptionHandler {
@@ -28,7 +35,7 @@ public class ResourceExeceptionHandler {
     }
 
     @ExceptionHandler(DataIntegrityViolationException.class)
-    public ResponseEntity<StandardError> tecnicoNotFoundException(DataIntegrityViolationException ex,
+    public ResponseEntity<StandardError> dataIntegrityViolation(DataIntegrityViolationException ex,
                                                                   HttpServletRequest request){
         StandardError error = StandardError.builder()
                 .timestamp(LocalDateTime.now())
@@ -58,4 +65,31 @@ public class ResourceExeceptionHandler {
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
     }
+
+    @ExceptionHandler(ConstraintViolationException.class)
+    public ResponseEntity<StandardError> validationError(ConstraintViolationException ex,
+                                                         HttpServletRequest request){
+        ValidationError errors = new ValidationError(
+                LocalDateTime.now(),
+                HttpStatus.BAD_REQUEST.value(),
+                "Validation Error",
+                "Erro na validação dos campos",
+                request.getRequestURI()
+        );
+
+        for(ConstraintViolation constraintViolation : ex.getConstraintViolations()){
+            String fieldName = null;
+            for(Path.Node node : constraintViolation.getPropertyPath()){
+                fieldName = node.getName();
+            }
+            errors.addError(fieldName, constraintViolation.getMessage());
+        }
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
+    }
+
+
+
+
+
 }
