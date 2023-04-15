@@ -1,7 +1,5 @@
 package br.com.jardessouza.domain.dtos;
 
-import br.com.jardessouza.domain.enums.Prioridade;
-import br.com.jardessouza.domain.enums.Status;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
