@@ -23,6 +23,11 @@ login: thomas@mail.com
 senha: 123
 ```
 
+Para abrir a documentação (disponibilizada através do Swagger 2) de todas as operações implementadas com o padrão arquitetural REST, acesse o seguinte link abaixo:
+```
+ttps://helpdesk-prodd.herokuapp.com/swagger-ui.html
+```
+
 Após executar o comando acima, basta apenas abrir o seguinte endereço e visualizar a execução do projeto:
 
 As seguintes ferramentas abaixo são utilizadas como parte do desenvolvimento do projeto:
