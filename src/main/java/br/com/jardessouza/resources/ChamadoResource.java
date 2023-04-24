@@ -3,6 +3,7 @@ package br.com.jardessouza.resources;
 import br.com.jardessouza.domain.Chamado;
 import br.com.jardessouza.domain.dtos.ChamadoRequest;
 import br.com.jardessouza.domain.dtos.ChamadoResponse;
+import br.com.jardessouza.resources.documentation.ChamadoResourceDocs;
 import br.com.jardessouza.service.ChamadoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +18,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/chamados")
 @RequiredArgsConstructor
-public class ChamadoResource {
+public class ChamadoResource implements ChamadoResourceDocs {
     private final ChamadoService chamadoService;
 
     @GetMapping(path = "/{id}")

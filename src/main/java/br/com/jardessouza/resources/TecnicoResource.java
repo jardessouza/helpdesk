@@ -3,6 +3,7 @@ package br.com.jardessouza.resources;
 import br.com.jardessouza.domain.Tecnico;
 import br.com.jardessouza.domain.dtos.TecnicoRequest;
 import br.com.jardessouza.domain.dtos.TecnicoResponse;
+import br.com.jardessouza.resources.documentation.TecnicoResourceDocs;
 import br.com.jardessouza.service.TecnicoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +19,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping(value = "/tecnicos")
 @RequiredArgsConstructor
-public class TecnicoResource {
+public class TecnicoResource implements TecnicoResourceDocs {
 
     private final TecnicoService tenicoService;
 

@@ -3,6 +3,7 @@ package br.com.jardessouza.resources;
 import br.com.jardessouza.domain.Cliente;
 import br.com.jardessouza.domain.dtos.ClienteRequest;
 import br.com.jardessouza.domain.dtos.ClienteResponse;
+import br.com.jardessouza.resources.documentation.ClienteResourceDocs;
 import br.com.jardessouza.service.ClienteService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +18,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/clientes")
 @RequiredArgsConstructor
-public class ClienteResource {
+public class ClienteResource implements ClienteResourceDocs {
     private final ClienteService clienteService;
 
     @GetMapping(path = "/{id}")
