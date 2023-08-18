@@ -15,7 +15,7 @@ Durante o projeto, são abordados os seguintes tópicos:
 Para executar o projeto em uma API Client, digite o seguinte comando:
 
 ```
-https://helpdesk-prodd.herokuapp.com/login
+https://helpdesk-back-production-c25e.up.railway.app/login
 ```
 Para fazer o login segue abaixo:
 ```
@@ -25,7 +25,7 @@ senha: 123
 
 Para abrir a documentação (disponibilizada através do Swagger 2) de todas as operações implementadas com o padrão arquitetural REST, acesse o seguinte link abaixo:
 ```
-https://helpdesk-prodd.herokuapp.com/swagger-ui.html
+https://helpdesk-back-production-c25e.up.railway.app/swagger-ui.html
 ```
 
 Após executar o comando acima, basta apenas abrir o seguinte endereço e visualizar a execução do projeto:
